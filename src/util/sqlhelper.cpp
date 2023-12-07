@@ -92,9 +92,11 @@ void printExpression(Expr* expr, uintmax_t num_indent) {
   if (!expr) return;
   switch (expr->type) {
     case kExprStar:
+        inprint("kExprStar\r", num_indent);
       inprint("*", num_indent);
       break;
     case kExprColumnRef:
+        inprint("kExprColumnRef", num_indent);
       inprint(expr->name, num_indent);
       if (expr->table) {
         inprint("Table:", num_indent + 1);
@@ -103,26 +105,33 @@ void printExpression(Expr* expr, uintmax_t num_indent) {
       break;
     // case kExprTableColumnRef: inprint(expr->table, expr->name, num_indent); break;
     case kExprLiteralFloat:
+        inprint("kExprLiteralFloat", num_indent);
       inprint(expr->fval, num_indent);
       break;
     case kExprLiteralInt:
+        inprint("kExprLiteralInt", num_indent);
       inprint(expr->ival, num_indent);
       break;
     case kExprLiteralString:
+        inprint("kExprLiteralString", num_indent);
       inprint(expr->name, num_indent);
       break;
     case kExprLiteralDate:
+        inprint("kExprLiteralDate", num_indent);
       inprint(expr->name, num_indent);
       break;
     case kExprLiteralNull:
+        inprint("kExprLiteralNull", num_indent);
       inprint("NULL", num_indent);
       break;
     case kExprLiteralInterval:
+        inprint("kExprLiteralInterval", num_indent);
       inprint("INTERVAL", num_indent);
       inprint(expr->ival, num_indent + 1);
       inprint(expr->datetimeField, num_indent + 1);
       break;
     case kExprFunctionRef:
+        inprint("kExprFunctionRef", num_indent);
       inprint(expr->name, num_indent);
       for (Expr* e : *expr->exprList) {
         printExpression(e, num_indent + 1);
@@ -133,30 +142,37 @@ void printExpression(Expr* expr, uintmax_t num_indent) {
       }
       break;
     case kExprExtract:
+        inprint("kExprExtract", num_indent);
       inprint("EXTRACT", num_indent);
       inprint(expr->datetimeField, num_indent + 1);
       printExpression(expr->expr, num_indent + 1);
       break;
     case kExprCast:
+        inprint("kExprCast", num_indent);
       inprint("CAST", num_indent);
       inprint(expr->columnType, num_indent + 1);
       printExpression(expr->expr, num_indent + 1);
       break;
     case kExprOperator:
+        inprint("kExprOperator", num_indent);
       printOperatorExpression(expr, num_indent);
       break;
     case kExprSelect:
+        inprint("kExprSelect", num_indent);
       printSelectStatementInfo(expr->select, num_indent);
       break;
     case kExprParameter:
+        inprint("kExprParameter", num_indent);
       inprint(expr->ival, num_indent);
       break;
     case kExprArray:
+        inprint("kExprArray", num_indent);
       for (Expr* e : *expr->exprList) {
         printExpression(e, num_indent + 1);
       }
       break;
     case kExprArrayIndex:
+        inprint("kExprArrayIndex", num_indent);
       printExpression(expr->expr, num_indent + 1);
       inprint(expr->ival, num_indent);
       break;
